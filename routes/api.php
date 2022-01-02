@@ -20,18 +20,22 @@ use App\Models\User;
 // });
 
 Route::group([
-    'middleware' => 'api',
     'prefix' => 'auth',
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     Route::post('login', 'AuthController@login');
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
+});
+
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'auth',
+    'namespace' => 'App\Http\Controllers',
+], function ($router) {
     Route::get('me', 'AuthController@me');
 });
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'jwt.verify',
     'prefix' => 'ghibli',
     'namespace' => 'App\Http\Controllers\Ghibli',
 ], function ($router) {

@@ -41,6 +41,7 @@ class TymonTWTRoderProvider extends EloquentUserProvider
         return $query->first();
     }
     public function validateCredentials(UserContract $user, array $credentials) {
+        // exit($user);
         $plain = $credentials['pass'];
         return $plain == $user->getAuthPassword();
     }

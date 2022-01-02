@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class FilmController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:api');
+        // $this->middleware('auth:api');
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class FilmController extends Controller
         $data = Film::all();
         // $model_film = new \App\Models\Film();
         // $data = $model_film->getAllFilms();
-        return response()->json(['films' => $data], 200);
+        return response()->json(['films' => $data, 'status' => true], 200);
     }
 
     /**
@@ -43,14 +43,14 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        return response()->json(['film' => $film], 200);
+        return response()->json(['film' =>$film, 'status' => true], 200);
     }
 
     public function detail(Request $request) {
         $id_film = $request->route('id');
         $model_film = new \App\Models\Film();
         $film = $model_film->getDetailFilmById($id_film);
-        return response()->json(['film' => $film], 200);
+        return response()->json(['film' =>$film, 'status' => true], 200);
     }
 
     /**
